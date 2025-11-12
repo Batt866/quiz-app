@@ -1,15 +1,21 @@
-export function Header() {
+import Link from "next/link";
+import React from "react";
+import { FaRegUserCircle } from "react-icons/fa";
+
+const Header = () => {
   return (
-    <div className="h-15 w-full bg-white flex fixed ">
-      {" "}
-      <h1 className="font-semibold text-2xl flex items-center text-black">
-        Quiz app
-      </h1>
-      <div className="flex-1"></div>
-      <div>
-        {" "}
-        <img className="flex items-center" src="avatar.svg" />
+    <div className="w-screen h-16 items-center flex border-b-2 fixed  bg-accent">
+      <Link href="/">
+        <div className=" font-semibold text-[16px] text-sm:text-[36px] items-center">
+          Quiz app
+        </div>
+      </Link>
+
+      <div className="text-[26px] ml-450">
+        <FaRegUserCircle />
       </div>
     </div>
   );
-}
+};
+
+export default Header;
