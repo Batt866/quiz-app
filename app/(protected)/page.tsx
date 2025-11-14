@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import Link from "next/link";
 
 type Question = {
   question: string;
@@ -34,7 +33,6 @@ export default function Home() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  // 🧠 Summary үүсгэх
   const handleGenerateSummary = async () => {
     try {
       setLoading(true);
@@ -60,7 +58,6 @@ export default function Home() {
     }
   };
 
-  // 🤖 Quiz үүсгэх
   const handleGenerateQuiz = async () => {
     if (!articleSummary || !takeID) {
       alert("Summary болон ID дутуу байна!");
@@ -92,7 +89,6 @@ export default function Home() {
     }
   };
 
-  // ✅ Хариулт шалгах
   const handleAnswer = (selectedIndex: number) => {
     const current = questions[step];
     const correctIndex = parseInt(current.answer);
@@ -119,7 +115,6 @@ export default function Home() {
 
   return (
     <div className="bg-accent w-screen h-screen p-10 overflow-y-auto">
-      {/* 📰 Эхний хуудас */}
       {page === "start" && (
         <div className="w-[856px] mx-auto bg-white border rounded-md p-6 mt-20">
           <div className="flex gap-2 mb-2 items-center">
@@ -162,7 +157,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* 🧾 Summary page */}
       {page === "summary" && (
         <div className="w-[856px] mx-auto bg-white border rounded-md p-6 mt-20">
           <div
@@ -193,7 +187,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* 🧠 Quiz page */}
       {page === "quiz" && questions[step] && (
         <div className="w-[700px] mx-auto bg-white border rounded-md p-6 mt-20">
           <div className="flex justify-between items-center">
@@ -227,7 +220,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* 🏁 Results page */}
       {page === "result" && (
         <div className="w-[600px] mx-auto bg-white border rounded-md p-6 mt-20">
           <div className="flex gap-2 items-center mb-4">

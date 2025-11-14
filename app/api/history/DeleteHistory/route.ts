@@ -1,4 +1,3 @@
-import { query } from "@/lib/connectDB";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const { ID } = await req.json();
     const id = ID;
-    const deletetitle = await prisma.articles.delete({
+    const deletetitle = await prisma.article.delete({
       where: {
         id: id,
       },

@@ -17,6 +17,7 @@ export function AppSidebar() {
     id: string;
   };
   const [history, SetHistory] = useState<History[]>([]);
+  const [check, setCheck] = useState(false);
   const getHistory = async () => {
     const result = await fetch("/api/generate/summary");
 
@@ -55,37 +56,53 @@ export function AppSidebar() {
       return;
     }
   };
+  const CheckHandler = () => {
+    if (!check) {
+      setCheck(true);
+    } else {
+      setCheck(false);
+    }
+  };
 
   return (
-    <Sidebar className="mt-16">
-      <div className="flex items-center mx-4 justify-between  gap-20 mt-4 ">
-        <div className="font-extrabold h-7">History</div>
-        <SidebarTrigger className="h-6 w-6 " />
-      </div>
-
+    <Sidebar collapsible="icon" className="mt-16">
       <SidebarHeader />
+
+      <SidebarTrigger
+        aria-label="Toggle sidebar"
+        className="absolute top-4 right-4 z-50 h-6 w-6"
+        onClick={() => CheckHandler()}
+      />
+
       <SidebarContent>
-        <div className="mx-4">
-          {history && (
-            <div>
-              {history.map((data, index) => (
-                <div key={index} className="h-6 font-semibold my-2 ">
+        {!check ? (
+          <div>
+            <div className="flex items-center mx-4 justify-between gap-20 mt-4">
+              <div className="font-extrabold h-7">History</div>
+            </div>
+            <div className="mx-4">
+              {history?.map((data, index) => (
+                <div key={index} className="h-6 font-semibold my-2">
                   <div className="flex w-[223px] justify-between">
                     <div onClick={() => HistoryOnclick(data)}>{data.title}</div>
                     <img
                       onClick={() => DeleteTitle(data)}
-                      src="/delete.svg
-                  "
-                    ></img>
+                      src="/delete.svg"
+                      alt="Delete"
+                    />
                   </div>
                 </div>
               ))}
             </div>
-          )}
-        </div>
-        <SidebarGroup />
-        <SidebarGroup />
+          </div>
+        ) : (
+          ""
+        )}
+
+        {/* <SidebarGroup />
+        <SidebarGroup /> */}
       </SidebarContent>
+
       <SidebarFooter />
     </Sidebar>
   );
