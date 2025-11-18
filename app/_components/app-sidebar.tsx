@@ -98,9 +98,6 @@ export function AppSidebar() {
         ) : (
           ""
         )}
-
-        {/* <SidebarGroup />
-        <SidebarGroup /> */}
       </SidebarContent>
 
       <SidebarFooter />
